@@ -1,15 +1,17 @@
+use std::io::Read;
+
 use comrak::nodes::{AstNode, NodeValue};
 use comrak::{parse_document, Arena, ComrakOptions};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    //let text = std::fs::read_to_string("/home/wiktor/Downloads/readme.md")?;
-    let text = std::io::stdin().lines().collect::<Result<String, _>>()?;
+    let mut text = String::new();
+    std::io::stdin().read_to_string(&mut text)?;
+
     let arena = Arena::new();
-    println!("..{}..", text.len());
+
     let root = parse_document(&arena, &text, &ComrakOptions::default());
 
-    let mut expected_infos: Vec<_> = std::env::args().collect();
-    expected_infos.pop();
+    let expected_infos: Vec<_> = std::env::args().skip(1).collect();
 
     fn iter_nodes<'a, F>(node: &'a AstNode<'a>, f: &F)
     where
@@ -21,13 +23,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    iter_nodes(root, &|node| match &mut node.data.borrow_mut().value {
-        &mut NodeValue::CodeBlock(ref block) => {
+    iter_nodes(root, &|node| {
+        if let &mut NodeValue::CodeBlock(ref block) = &mut node.data.borrow_mut().value {
             let info = String::from_utf8_lossy(&block.info);
             let code = String::from_utf8_lossy(&block.literal);
-            println!("found {} with content {}.", info, code);
+            if expected_infos.iter().any(|s| s == &*info) {
+                println!("{}", code);
+            }
         }
-        _ => (),
     });
 
     Ok(())
