@@ -1,0 +1,14 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: tangler
+Upstream-Contact: Wiktor Kwapisiewicz <wiktor@metacode.biz>
+Source: https://github.com/wiktor-k/tangler
+
+Files: Cargo.lock
+Copyright: 2023 Wiktor Kwapisiewicz <wiktor@metacode.biz>
+License: CC0-1.0
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...

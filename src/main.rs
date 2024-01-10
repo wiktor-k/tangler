@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2023 Wiktor Kwapisiewicz <wiktor@metacode.biz>
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+
 use std::io::Read;
 
 use comrak::nodes::{AstNode, NodeValue};
