@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2023 Wiktor Kwapisiewicz <wiktor@metacode.biz>
+# SPDX-License-Identifier: CC0-1.0
+
+[codespell]
+skip = .cargo,.git,target,.env,Cargo.lock
+ignore-words-list = crate
