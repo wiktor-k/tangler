@@ -9,6 +9,11 @@ jobs:
   check-files:
     runs-on: ubuntu-latest
     steps:
+      - run: sudo apt-get update -y -qq && sudo apt-get install -y -qq --no-install-recommends codespell reuse
+      - run: rustup component add clippy
+      - run: rustup toolchain install nightly
+      - run: rustup component add --toolchain nightly rustfmt
+      - run: cargo install cargo-deny
       - uses: extractions/setup-just@v1
       - uses: actions/checkout@v2
       - run: just check-files
