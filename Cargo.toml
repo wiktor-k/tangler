@@ -15,3 +15,7 @@ repository = "https://github.com/wiktor-k/tangler"
 [dependencies]
 comrak = "0.15.0"
 
+[dev-dependencies]
+rstest = "0.18.2"
+testresult = "0.3.0"
+
