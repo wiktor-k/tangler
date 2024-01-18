@@ -7,6 +7,30 @@
 
 use std::io::{BufRead, BufReader, Read, Result, Write};
 
+/// Extracts expected code-blocks from Markdown source and writes them into sink.
+///
+/// Multiple expected code-block infos can be passed. In this case it's
+/// sufficient for any one of them to match for the code-block to be printed.
+///
+/// This function will not lint the source and assumes that the input is a valid
+/// Markdown document.
+///
+/// # Examples
+///
+/// ```
+/// use std::io::Write;
+///
+/// # fn main() -> testresult::TestResult {
+/// let source = r#"```sh
+/// echo x
+/// ```"#;
+/// let mut sink = Vec::new();
+///
+/// tangler::extract(source.as_bytes(), &mut sink, &["sh"])?;
+///
+/// assert_eq!(&b"echo x\n\n"[..], &sink[..]);
+/// # Ok(()) }
+/// ```
 pub fn extract(
     source: impl Read,
     mut sink: impl Write,
