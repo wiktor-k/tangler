@@ -1,38 +1,31 @@
 // SPDX-FileCopyrightText: 2023 Wiktor Kwapisiewicz <wiktor@metacode.biz>
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use std::io::{Read, Result, Write};
+#![doc = include_str!("../README.md")]
+#![deny(missing_debug_implementations)]
+#![deny(missing_docs)]
 
-use comrak::nodes::{AstNode, NodeValue};
-use comrak::{parse_document, Arena, ComrakOptions};
+use std::io::{BufRead, BufReader, Read, Result, Write};
 
-pub fn extract(mut source: impl Read, mut sink: impl Write, expected: &[String]) -> Result<()> {
-    let mut text = String::new();
-    source.read_to_string(&mut text)?;
-
-    let arena = Arena::new();
-
-    let root = parse_document(&arena, &text, &ComrakOptions::default());
-
-    fn iter_nodes<'a, F>(node: &'a AstNode<'a>, f: &mut F)
-    where
-        F: FnMut(&'a AstNode<'a>),
-    {
-        f(node);
-        for c in node.children() {
-            iter_nodes(c, f);
+pub fn extract(
+    source: impl Read,
+    mut sink: impl Write,
+    expected: &[impl AsRef<str>],
+) -> Result<()> {
+    let mut outputting = false;
+    for line in BufReader::new(source).lines() {
+        let line = line?;
+        if line == "```" && outputting {
+            sink.write_all(b"\n")?;
+            outputting = false;
+        } else if line.starts_with("```") && expected.iter().any(|info| info.as_ref() == &line[3..])
+        {
+            outputting = true;
+        } else if outputting {
+            sink.write_all(line.as_bytes())?;
+            sink.write_all(b"\n")?;
         }
     }
-
-    iter_nodes(root, &mut |node| {
-        if let &mut NodeValue::CodeBlock(ref block) = &mut node.data.borrow_mut().value {
-            let info = String::from_utf8_lossy(&block.info);
-            let code = String::from_utf8_lossy(&block.literal);
-            if expected.iter().any(|s| *s == info) {
-                writeln!(sink, "{}", code).expect("write to work");
-            }
-        }
-    });
 
     Ok(())
 }
