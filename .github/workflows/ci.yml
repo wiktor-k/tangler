@@ -12,6 +12,7 @@ on:
 
 jobs:
   check-files:
+    name: Check files in the latest commit
     runs-on: ubuntu-latest
     container:
       image: archlinux
