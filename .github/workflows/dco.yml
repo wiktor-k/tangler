@@ -9,4 +9,4 @@ jobs:
   check-dco:
     runs-on: ubuntu-latest
     steps:
-      - uses: tisonkun/actions-dco@v1.1
+      - uses: KineticCafe/actions-dco@v1
