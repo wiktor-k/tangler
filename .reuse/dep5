@@ -3,7 +3,7 @@ Upstream-Name: tangler
 Upstream-Contact: Wiktor Kwapisiewicz <wiktor@metacode.biz>
 Source: https://github.com/wiktor-k/tangler
 
-Files: Cargo.lock
+Files: Cargo.lock fixtures/README.sh fixtures/ssh-openpgp-auth.sh
 Copyright: 2023 Wiktor Kwapisiewicz <wiktor@metacode.biz>
 License: CC0-1.0
 

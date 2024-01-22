@@ -10,8 +10,7 @@ description = "Extracts code blocks from Markdown documents"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/wiktor-k/tangler"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-comrak = "0.15.0"
+[dev-dependencies]
+rstest = "0.18.2"
+testresult = "0.3.0"
 
