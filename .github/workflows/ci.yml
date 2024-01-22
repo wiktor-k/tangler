@@ -3,17 +3,16 @@
 
 name: CI
 
-on: [pull_request, push]
+on: pull_request
 
 jobs:
   check-files:
     runs-on: ubuntu-latest
+    container:
+      image: archlinux
     steps:
-      - run: sudo apt-get update -y -qq && sudo apt-get install -y -qq --no-install-recommends codespell reuse
-      - run: rustup component add clippy
-      - run: rustup toolchain install nightly
-      - run: rustup component add --toolchain nightly rustfmt
-      - run: cargo install cargo-deny
-      - uses: extractions/setup-just@v1
+      - run: pacman -Sy --needed --noconfirm archlinux-keyring
+      - run: pacman -Syu --needed --noconfirm just
       - uses: actions/checkout@v2
-      - run: just check-files
+      - run: just install
+      - run: CARGO_TARGET_DIR=/tmp/cargo just ci
