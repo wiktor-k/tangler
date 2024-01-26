@@ -7,6 +7,7 @@ on: [pull_request]
 
 jobs:
   check-dco:
+    name: Check commits for sign-offs
     runs-on: ubuntu-latest
     steps:
-      - uses: tisonkun/actions-dco@v1.1
+      - uses: KineticCafe/actions-dco@v1
