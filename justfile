@@ -22,7 +22,7 @@ install: install-packages install-tools
 install-packages:
     # Packages that are needed by this justfile are listed directly
     # Any extra packages are set in the `.env` file
-    pacman -Syu --needed --noconfirm rustup codespell reuse cargo-deny tangler $PACMAN_PACKAGES
+    pacman -Syu --needed --noconfirm rustup codespell reuse cargo-edit cargo-deny tangler $PACMAN_PACKAGES
 
 # Installs any user tools required to run development tooling
 install-tools:
