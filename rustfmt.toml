@@ -1,5 +1,0 @@
-# SPDX-FileCopyrightText: 2023 Wiktor Kwapisiewicz <wiktor@metacode.biz>
-# SPDX-License-Identifier: CC0-1.0
-
-group_imports = "StdExternalCrate"
-format_code_in_doc_comments = true

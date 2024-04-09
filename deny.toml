@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 David Runge <dave@sleepmap.de>
-# SPDX-FileCopyrightText: 2023 Wiktor Kwapisiewicz <wiktor@metacode.biz>
-# SPDX-License-Identifier: CC0-1.0
-
 [advisories]
-unmaintained = "deny"
+version = 2
 yanked = "deny"
 ignore = [
 ]
@@ -11,8 +7,10 @@ ignore = [
 [bans]
 deny = [
 ]
+multiple-versions = "allow"
 
 [licenses]
+version = 2
 allow = [
   "Apache-2.0",
   "MIT",

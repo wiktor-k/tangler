@@ -5,7 +5,7 @@ SPDX-License-Identifier: MIT OR Apache-2.0
 
 # Tangler
 
-[![CI](https://github.com/wiktor-k/tangler/actions/workflows/ci.yml/badge.svg)](https://github.com/wiktor-k/tangler/actions/workflows/ci.yml)
+[![CI](https://github.com/wiktor-k/tangler/actions/workflows/rust.yml/badge.svg)](https://github.com/wiktor-k/tangler/actions/workflows/rust.yml)
 [![Crates.io](https://img.shields.io/crates/v/tangler)](https://crates.io/crates/tangler)
 
 Extracts (tangles) code fragments from Markdown documents.
