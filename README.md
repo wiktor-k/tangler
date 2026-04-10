@@ -16,7 +16,7 @@ The most common use of this crate is installing it as part of the CI script, ext
 
 ```bash
 cargo install tangler
-tangler bash < README.md | bash -euxo pipefail -
+tangler --preserve-newlines bash < README.md | bash -euxo pipefail -
 ```
 
 The first argument is a selector of the blocks that should be extracted. The tool takes the input markdown document from stdin and outputs only matching blocks to stdout.

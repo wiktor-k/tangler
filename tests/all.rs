@@ -5,15 +5,28 @@ use std::fs::read_to_string;
 use std::path::PathBuf;
 
 use rstest::rstest;
-use tangler::extract;
+use tangler::{extract, Options};
 use testresult::TestResult;
 
 #[rstest]
-fn main(
-    #[files("fixtures/*")]
+fn no_preserve(
+    #[files("fixtures/pres-*")]
     #[exclude("md")]
-    mut path: PathBuf,
+    path: PathBuf,
 ) -> TestResult {
+    run_extract(path, &Options::default().set_preserve_newlines(true))
+}
+
+#[rstest]
+fn preserve(
+    #[files("fixtures/no-pres-*")]
+    #[exclude("md")]
+    path: PathBuf,
+) -> TestResult {
+    run_extract(path, &Options::default().set_preserve_newlines(false))
+}
+
+fn run_extract(mut path: PathBuf, options: &Options) -> TestResult {
     let extension = path.extension().expect("test file to have an extension");
     let extension: String = extension.to_string_lossy().into();
     let output = read_to_string(&path)?;
@@ -21,7 +34,7 @@ fn main(
     path.set_extension("md");
     let input = read_to_string(&path)?;
     let mut actual_output = vec![];
-    extract(input.as_bytes(), &mut actual_output, &[extension])?;
+    extract(input.as_bytes(), &mut actual_output, &[extension], options)?;
     assert_eq!(
         output,
         String::from_utf8(actual_output)?,
