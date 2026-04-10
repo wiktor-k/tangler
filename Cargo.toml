@@ -11,6 +11,6 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/wiktor-k/tangler"
 
 [dev-dependencies]
-rstest = "0.18.2"
-testresult = "0.3.0"
+rstest = "0.26.1"
+testresult = "0.4.1"
 
